@@ -45,7 +45,7 @@ Python スクリプトの中から呼び出すには
 
 .. code-block:: python
 
-    >>> depgen import DepGen
+    >>> from depgen import DepGen
     >>> dg = DepGen()
     >>> text = "サイコロステーキを食べたいです。"
     >>> dg.analyze(text)
