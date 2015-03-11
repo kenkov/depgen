@@ -2,6 +2,7 @@
 # coding:utf-8
 
 from cabocha import CaboChaAnalyzer
+import config
 
 
 class DepGen:
@@ -12,31 +13,8 @@ class DepGen:
         """
         文節に使うチャンクかどうかをチェックする
         """
-        stop_pos1s = {
-            "代名詞",
-        }
-
-        # compare to genkei
-        stop_words = {
-            "する",
-            "いう",
-            "なる",
-            "ある",
-            "いる",
-            "こと", "事",
-            "もの", "物",
-            "ほう", "方",
-            "とき", "時",
-            "時点", "じてん",
-            # 時間に関するもの
-            "分",
-            "日", "今日", "明日", "明後日", "昨日", "一昨日",
-            "月", "今月", "来月", "先月",
-            "年", "今年", "来年", "昨年",
-            # 名前に関するもの
-            "さん", "ちゃん", "たん", "殿", "との", "どの",
-            "君", "くん"
-        }
+        stop_pos1s = config.stop_pos1s
+        stop_words = config.stop_words
 
         return not any(
             token.pos1 in stop_pos1s or token.genkei in stop_words
@@ -47,7 +25,9 @@ class DepGen:
         """
         文節の token と subject を返す
 
-        もし token.pos が名詞だった場合、subject は
+        接頭詞以外のはじめの単語が subject となる。
+
+        ただし token.pos が名詞だった場合、subject は
         その token からはじまる連続した名詞を連結したものになる
         """
         subjects = []
