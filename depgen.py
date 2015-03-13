@@ -2,7 +2,7 @@
 # coding:utf-8
 
 from cabocha import CaboChaAnalyzer
-import config
+import depgen_config as config
 
 
 class DepGen:
